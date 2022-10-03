@@ -1,34 +1,13 @@
 import express from 'express';
 import connection from './database/database.js';
+import categoriesRoute from "./routes/categoriesRoute.js"
 
 
 const server = express()
 
 server.use(express.json())
 
-server.get('/categories', async (req, res) => {
- 
-    try {
-        const users = await connection.query('SELECT * FROM categories')
-        res.send(users.rows)
-
-    } catch (error) {
-        console.log(error)
-    }
-
-})
-server.post('/categories', async (req, res) => {
-
-    const {name} = req.body
-
-    try {
-        const users = await connection.query(`INSERT INTO categories (name) VALUES ($1)`, [name])
-        res.send(users.rows)
-
-    } catch (error) {
-        console.log(error)
-    }
-})
+server.use(categoriesRoute)
 server.get('/games', async (req, res) => {
  
     try {
