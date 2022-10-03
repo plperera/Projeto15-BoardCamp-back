@@ -1,6 +1,6 @@
 import connection from "../database/database";
 
-async function gamesGetContoller(req, res){
+async function gamesGetController(req, res){
 
     try {
         const users = await connection.query(`
@@ -16,7 +16,7 @@ async function gamesGetContoller(req, res){
     }
 
 }
-async function gamesPostContoller(req, res){
+async function gamesPostController(req, res){
 
     const {name, image, stockTotal, categoryId, pricePerDay} = req.body
  
@@ -37,4 +37,4 @@ async function gamesPostContoller(req, res){
 
 }
 
-export {gamesGetContoller, gamesPostContoller}
+export {gamesGetController, gamesPostController}

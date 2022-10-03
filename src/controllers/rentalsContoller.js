@@ -1,6 +1,6 @@
 import connection from "../database/database";
 
-async function rentalsGetContoller(req, res){
+async function rentalsGetController(req, res){
 
     const {name, phone, cpf, birthday} = req.body
  
@@ -19,7 +19,7 @@ async function rentalsGetContoller(req, res){
         console.log(error)
     }
 }
-async function rentalsPostContoller(req, res){
+async function rentalsPostController(req, res){
     
     const {customerId, gameId, daysRented} = req.body
     const rentDate = "03/10/2022 data da inserção"
@@ -41,4 +41,4 @@ async function rentalsPostContoller(req, res){
     }
 }
 
-export {rentalsGetContoller, rentalsPostContoller}
+export {rentalsGetController, rentalsPostController}

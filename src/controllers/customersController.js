@@ -1,6 +1,6 @@
 import connection from "../database/database";
 
-async function customersGetContoller(req, res){
+async function customersGetController(req, res){
 
     try {
         const users = await connection.query(`
@@ -13,7 +13,7 @@ async function customersGetContoller(req, res){
     }
 
 }
-async function customersPostContoller(req, res){
+async function customersPostController(req, res){
 
     const {name, phone, cpf, birthday} = req.body
  
@@ -43,4 +43,4 @@ async function customersPutController(req, res){
     }
 }
 
-export {customersGetContoller, customersPostContoller, customersPutController}
+export {customersGetController, customersPostController, customersPutController}
