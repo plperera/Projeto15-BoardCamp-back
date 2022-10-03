@@ -16,10 +16,10 @@ async function customersGetController(req, res){
 
             const users2 = await connection.query(`
             SELECT *
-                FROM customers ; 
-            `)
+                FROM customers '%$1%'; 
+            `, [req.query.cpf])
     
-            res.send(users2.rows)   
+            res.send(users2.cpf)   
         }
         
     } catch (error) {
