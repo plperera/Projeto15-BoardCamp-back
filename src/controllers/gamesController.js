@@ -19,7 +19,7 @@ async function gamesGetController(req, res){
             SELECT games.id, games.name, games.image, games."stockTotal", games."categoryId" , games."pricePerDay", categories.name as "categoryName"
                 FROM games 
                     JOIN categories ON games."categoryId" = categories.id WHERE games.name=$1;
-            `,[req.query.name])
+            `,[decodeURI(req.query.name)])
     
             res.send(users2.rows)   
         }
