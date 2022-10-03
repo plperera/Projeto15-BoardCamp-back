@@ -26,15 +26,7 @@ async function gamesGetController(req, res){
         
     } catch (error) {
         console.log(error)
-    }
-    
-    try {
-        
-
-    } catch (error) {
-        
-    }
-    
+    }    
 }
 async function gamesPostController(req, res){
 
