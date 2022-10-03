@@ -5,15 +5,35 @@ async function rentalsGetController(req, res){
     const {name, phone, cpf, birthday} = req.body
  
     try {
-
-        const users = await connection.query(`
-        SELECT * 
-            FROM rentals 
-                JOIN customers ON rentals."customerId" = customers.id
-                JOIN games ON rentals."gameId" = games.id;
-        `)
-
-        res.send(users.rows)
+        if (req.query.gameId === undefined && req.query.customerId === undefined ){
+            const users = await connection.query(`
+            SELECT * 
+                FROM rentals 
+                    JOIN customers ON rentals."customerId" = customers.id
+                    JOIN games ON rentals."gameId" = games.id;
+            `)
+    
+            res.send(users.rows)   
+        } else if (req.query.gameId === undefined) {
+            const users2 = await connection.query(`
+            SELECT * 
+                FROM rentals 
+                    JOIN customers ON rentals."customerId" = customers.id
+                    JOIN games ON rentals."gameId" = games.id WHERE customerId=$1;
+            `, [req.query.customerId])
+    
+            res.send(users2.rows)   
+        } else {
+            const users2 = await connection.query(`
+            SELECT * 
+                FROM rentals 
+                    JOIN customers ON rentals."customerId" = customers.id
+                    JOIN games ON rentals."gameId" = games.id WHERE gameId=$1;
+            `, [req.query.gameId])
+    
+            res.send(users2.rows)   
+        }
+        
 
     } catch (error) {
         console.log(error)
