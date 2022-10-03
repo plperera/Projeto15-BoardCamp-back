@@ -1,5 +1,5 @@
 import express from 'express';
-import connection from '../database/database.js';
+
 import { customersGetMiddleware, customersPostMiddleware, customersPutMiddleware } from '../middleware/customersMiddleware.js';
 
 const router = express.Router()

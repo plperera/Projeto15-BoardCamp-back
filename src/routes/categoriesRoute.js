@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { categoriesGetMiddleware, categoriesPostMiddleware } from '../middleware/categoriesMiddleware.js';
 
 const router = express.Router()
