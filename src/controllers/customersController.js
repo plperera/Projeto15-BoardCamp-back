@@ -3,15 +3,28 @@ import connection from "../database/database.js";
 async function customersGetController(req, res){
 
     try {
-        const users = await connection.query(`
-        SELECT * FROM customers`)
+        if (req.query.name === undefined) {
 
-        res.send(users.rows)
+            const users = await connection.query(`
+            SELECT *
+                FROM customers; 
+            `)
+    
+            res.send(users.rows)  
 
+        } else {
+
+            const users2 = await connection.query(`
+            SELECT *
+                FROM customers ; 
+            `)
+    
+            res.send(users2.rows)   
+        }
+        
     } catch (error) {
         console.log(error)
-    }
-
+    } 
 }
 async function customersPostController(req, res){
 
