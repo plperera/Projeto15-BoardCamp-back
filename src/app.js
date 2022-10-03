@@ -1,50 +1,26 @@
 import express from 'express';
 import connection from './database/database.js';
-import categoriesRoute from "./routes/categoriesRoute.js"
 
+import categoriesRoute from "./routes/categoriesRoute.js"
+import customersRoute from "./routes/customersRoute.js"
+import gamesRoute from "./routes/gamesRoute.js"
+import rentalsRoute from "./routes/rentalsRoute.js"
 
 const server = express()
 
 server.use(express.json())
 
 server.use(categoriesRoute)
-server.get('/games', async (req, res) => {
- 
-    try {
 
-        const users = await connection.query(`
-        SELECT games.id, games.name, games.image, games."stockTotal", games."categoryId" , games."pricePerDay", categories.name as "categoryName"
-            FROM games 
-                JOIN categories ON games."categoryId" = categories.id;
-        `)
+server.use(customersRoute)
 
-        res.send(users.rows)
+server.use(gamesRoute)
 
-    } catch (error) {
-        console.log(error)
-    }
+server.use(rentalsRoute)
 
-})
-server.post('/games', async (req, res) => {
 
-    const {name, image, stockTotal, categoryId, pricePerDay} = req.body
- 
-    try {
-        
-        const users = await connection.query(`
-        INSERT INTO games 
-        (name, image, "stockTotal", "categoryId", "pricePerDay") 
-        VALUES ($1, $2, $3, $4, $5)
-        `, [name, image, stockTotal, categoryId, pricePerDay])
 
-        res.send(users.rows)
-        //`INSERT INTO games (name, image, "stockTotal", "categoryId", "pricePerDay") VALUES ('Banco Imobiliário', 'imagem top', '3', '1', '1500')`
 
-    } catch (error) {
-        console.log(error)
-    }
-
-})
 
 
 server.get('/rentals', async (req, res) => {
