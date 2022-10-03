@@ -16,8 +16,7 @@ async function customersPostMiddleware (req, res, next){
         const hasUser = await connection.query(`SELECT * FROM customers WHERE cpf=$1`, [req.body.cpf])
         if(hasUser.rows.length !== 0){
             return res.sendStatus(409)
-        }
-        else {
+        }else {
             next()
         }
     } catch (error) {
